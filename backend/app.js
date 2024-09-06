@@ -4,21 +4,24 @@ import jobRouter from "./routes/jobRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import applicationRouter from "./routes/applicationRoutes.js";
 import { config } from "dotenv";
-import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import { corsMiddleware } from "./middlewares/corsMiddleware.js";
 
 const app = express();
-config({ path: "./config/config.env" });
+// config({ path: "./config/config.env" });
+const result = config({ path: "./config/config.env" });
 
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL],
-    method: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
-  })
-);
+// Check for errors while loading .env file
+if (result.error) {
+  console.error("Error loading .env file:", result.error);
+  process.exit(1); // Exit the application if .env file is not loaded
+} else {
+  console.log(".env file loaded successfully");
+}
+
+app.use(corsMiddleware);
 
 app.use(cookieParser());
 app.use(express.json());
