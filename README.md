@@ -42,7 +42,7 @@
    CLOUDINARY_CLIENT_API=
    CLOUDINARY_CLIENT_API_SECRET=
    FRONTEND_URL=http://localhost:5173
-   MONGO_URI=mongodb+srv://yourusername:yourpassword@yourcluster.mongodb.net/
+   MONGO_URI=
    JWT_SECRET_KEY=your_secret_key
    JWT_EXPIRE=7d
    COOKIE_EXPIRE=5
